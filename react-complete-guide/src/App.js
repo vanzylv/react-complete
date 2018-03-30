@@ -55,20 +55,15 @@ class App extends Component {
 
   render() {
 
-    const style = {
-      backgroundColor: 'white',
-      font: 'inherit',
-      border: '1px solid blue',
-      padding: '8px',
-      cursor: 'pointer'
-    }
 
     let persons = null;
+    let btnClass = '';
 
     if (this.state.showPersons) {
       persons = (
-        <div>
-          {this.state.persons.map((person, index) => {
+          <div style={{margin:'auto',width: '100%'}}>
+          {
+            this.state.persons.map((person, index) => {
             return <Person
               key={person.id}
               click={() => this.deletePersonHandler(index)}
@@ -77,21 +72,22 @@ class App extends Component {
               changed={(event) => this.nameChangedHandler(event, person.id)}
             />
           })}
-
-        </div>
+          </div>
+      
       )
 
-      style.backgroundColor = 'green'
+      btnClass = classes.Red;
+
     }
 
 
     let assignedClasses = [];
 
-    if(this.state.persons.length <= 2){
+    if (this.state.persons.length <= 2) {
       assignedClasses.push(classes.red);
     }
 
-    if(this.state.persons.length <= 1){
+    if (this.state.persons.length <= 1) {
       assignedClasses.push(classes.bold);
     }
 
@@ -100,8 +96,8 @@ class App extends Component {
         <h1>Hi there</h1>
         <p className={assignedClasses.join(' ')}>This is working</p>
         <button
-          style={style}
-          onClick={() => this.togglePersonsHandler('TRRRRRest')}>Switch name</button>
+          className={btnClass}
+          onClick={() => this.togglePersonsHandler()}>Switch name</button>
         {persons}
       </div>
     );
