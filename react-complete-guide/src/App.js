@@ -8,9 +8,9 @@ class App extends Component {
   state = {
 
     persons: [
-      { id:1,name: 'Vickus111', age: '12' },
-      { id:2,name: 'Gert', age: '111' },
-      { id:3,name: 'Peter', age: '11' },
+      { id: 1, name: 'Vickus111', age: '12' },
+      { id: 2, name: 'Gert', age: '111' },
+      { id: 3, name: 'Peter', age: '11' },
     ],
     otherStte: 'rere',
     showPersons: true
@@ -18,10 +18,10 @@ class App extends Component {
   }
 
 
-  nameChangedHandler = (event,id) => {
+  nameChangedHandler = (event, id) => {
 
     const personIndex = this.state.persons.findIndex(p => {
-        return p.id === id;
+      return p.id === id;
     });
 
     const person = {
@@ -33,7 +33,7 @@ class App extends Component {
     const persons = [...this.state.persons];
     persons[personIndex] = person;
     this.setState({
-      persons:persons
+      persons: persons
     })
 
   }
@@ -68,25 +68,37 @@ class App extends Component {
     if (this.state.showPersons) {
       persons = (
         <div>
-
           {this.state.persons.map((person, index) => {
             return <Person
               key={person.id}
               click={() => this.deletePersonHandler(index)}
               name={person.name}
-              age={person.age} 
-              changed={(event) => this.nameChangedHandler(event,person.id)}
-              />
+              age={person.age}
+              changed={(event) => this.nameChangedHandler(event, person.id)}
+            />
           })}
 
         </div>
       )
+
+      style.backgroundColor = 'green'
+    }
+
+
+    let classes = [];
+
+    if(this.state.persons.length <= 2){
+      classes.push('red');
+    }
+
+    if(this.state.persons.length <= 1){
+      classes.push('bold');
     }
 
     return (
       <div className="App">
         <h1>Hi there</h1>
-        <p>This is working</p>
+        <p className={classes.join(' ')}>This is working</p>
         <button
           style={style}
           onClick={() => this.togglePersonsHandler('TRRRRRest')}>Switch name</button>
